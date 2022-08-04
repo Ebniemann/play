@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Piedra Papel Tijera</title>
+</head>
+
+<body>
+  <h1>Piedra Papel o Tijera</h1>
+  <div class="resultados"></div>
+
+  <button id="piedra" type="button">
+    <img src="./basico/src/img/rock.png" width="50px" height="50px"/>
+  </button>
+  <button id="papel" type="button">
+    <img src="./basico/src/img/paper.png" width="50px" height="50px"/>
+  </button>
+  <button id="tijera" type="button">
+    <img src="./basico/src/img/scissors.jpg" width="50px" height="50px"/>
+  </button>
+</body>
+
+<script>
+  const PIEDRA= 0;
+  const PAPEL= 1;
+  const TIJERA= 2;
+
+  const tie= 0;
+  const win= 1;
+  const lost= 2;
+  
+  const resultados = document.querySelector('.resultados');
+
+  const rockBtn= document.getElementById('piedra');
+  const paperBtn= document.getElementById('papel');
+  const scissorsBtn= document.getElementById('tijera');
+
+  rockBtn.addEventListener('click', ()=>{
+    play(PIEDRA)
+  })
+  paperBtn.addEventListener('click', ()=>{
+    play(PAPEL)
+  } )
+  scissorsBtn.addEventListener('click', ()=>{
+    play(TIJERA)
+  })
+
+  function play(user){
+    var maquina=Math.floor(Math.random() * 3);
+    var result= calcResult(user, maquina);  
+    if (result == 0){
+      resultados.innerHTML = "JS eligio " + maquina + "<br/>Usted eligio " + user + "<br/>Empate";}
+    if (result == 1){
+      resultados.innerHTML = "JS eligio " + maquina + "<br/>Usted eligio " + user + "<br/>Gano";}
+    if (result == 2){
+      resultados.innerHTML = "JS eligio " + maquina + "<br/>Usted eligio " + user + "<br/>Perdio"
+    }
+  }
+
+  function calcResult (user, maquina){
+    if (user === maquina){
+      return tie;  
+    } 
+    else if (user == PIEDRA && maquina == PAPEL){
+      return lost;
+    } 
+    else if (user == PAPEL && maquina == TIJERA){
+      return lost;
+    } 
+    else if (user == TIJERA && maquina == PIEDRA){
+      return lost;
+    } 
+    else if (user == PIEDRA && maquina == TIJERA){
+      return win;
+    } 
+    else if (user == PAPEL  && maquina == PIEDRA){
+      return win;
+    } 
+    else if (user == TIJERA && maquina == PAPEL){
+      return win;
+    }
+  }
+</script>
+</html>
